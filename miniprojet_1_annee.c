@@ -1,248 +1,226 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 #define Max 100
 
-    struct voiture
-    {
-        int kilometrage , disponibilite ;
-        float Prix_du_kilometre ;
-        char Marque[20] , Matricule[20] ;
+struct voiture 
+{
+    int kilometrage, disponibilite;
+    float Prix_du_kilometre;
+    char Marque[20], Matricule[20];
+};
 
-    };
-    
-    struct Client
-    {
-        char Nom_du_client[20] , CIN[20] , Matricule[20] ;
-        int Telephone[10] ; 
-        float Avance , Prix_à_payer 
-    } Client;
+struct Client 
+{
+    char Nom_du_client[20], CIN[20], Matricule[20];
+    int Telephone;
+    float Avance, Prix_à_payer;
+};
 
+struct voiture voitures[Max];
+struct Client Clients[Max];
 
-    struct voiture voitures[Max];
-    struct Client Clients[Max];
-    
-    int Nombre_de_voiture , Nombre_de_client ;
+int Nombre_de_voiture = 0, Nombre_de_client = 0;
 
-    Nombre_de_voiture = 0 ;
-    Nombre_de_client = 0 ;
-
-
-void ajouter_voitures ()
-
+void ajouter_voitures() 
 {
     printf("Marque : ");
-    scanf("%s",&voitures[Nombre_de_voiture].marque);
+    scanf("%s", voitures[Nombre_de_voiture].Marque);
 
     printf("Matricule : ");
-    scanf("%s",&voitures[Nombre_de_voiture].matricule);
+    scanf("%s", voitures[Nombre_de_voiture].Matricule);
 
-    printf("kilometrage : ");
-    scanf("%d",&voitures[Nombre_de_voiture].kilometrage);
+    printf("Kilometrage : ");
+    scanf("%d", &voitures[Nombre_de_voiture].kilometrage);
 
-    printf("Disponibilte (0/1) : ");
-    scanf("%d",&voitures[Nombre_de_voiture].disponibilite);
+    printf("Disponibilite (0/1) : ");
+    scanf("%d", &voitures[Nombre_de_voiture].disponibilite);
 
     printf("Prix du kilometre : ");
-    scanf("%f",&voitures[Nombre_de_voiture].Prix_du_kilometre);
+    scanf("%f", &voitures[Nombre_de_voiture].Prix_du_kilometre);
 
-    Nombre_de_voiture ++ ;
+    Nombre_de_voiture ++;
 }
 
-void afficher_voitures ()
+void afficher_voitures() 
 {
-    char Matricule[20] ;
+    char Matricule[20];
 
-    printf("entrer la matricule : ");
-    scanf("%s",&Matricule);
+    printf("Entrer la matricule : ");
+    scanf("%s", Matricule);
 
-    for ( int i = 0 ; i < Nombre_de_voiture ; i++)
+    for (int i = 0; i < Nombre_de_voiture; i++) 
     {
-        if ( strcmp( voitures[i].Matricule , Matricule ) == 0 )
+        if (strcmp(voitures[i].Matricule, Matricule) == 0) 
         {
-            prnitf("--- Voiture trouve ! --- \n");
+            printf("--- Voiture trouve ! ---\n");
 
-            printf("Marque : %s \n",voitures[i].Marque);
-            printf("kilometrage : %d \n",voitures[i].kilometrage);
-            printf("Disponibilte (0/1) : %d \n",voitures[i].disponibilite);
-            printf("Prix du kilometre : %.2f \n",voitures[i].Prix_du_kilometre);
+            printf("Marque : %s\n", voitures[i].Marque);
+            printf("Kilometrage : %d\n", voitures[i].kilometrage);
+            printf("Disponibilite : %d\n", voitures[i].disponibilite);
+            printf("Prix du kilometre : %.2f\n", voitures[i].Prix_du_kilometre);
         }
     }
 }
 
-void mofifier_voitures ()
+void modifier_voitures() 
 {
-    char Matricule[20] ;
-    int trouve = 0 ;
+    char Matricule[20];
+    int trouve = 0;
 
     printf("Matricule : ");
-    scanf("%s",&Matricule);
+    scanf("%s", Matricule);
 
-    for ( int i = 0 ; i < Nombre_de_voiture ; i++)
+    for (int i = 0; i < Nombre_de_voiture; i++) 
     {
-        if ( strcmp( voitures[i].Matricule , Matricule) == 0 )
+        if (strcmp(voitures[i].Matricule, Matricule) == 0) 
         {
-            trouve = 1 ;
-
+            trouve = 1;
+            
             printf("Nouvelle marque : ");
-            scanf(" %s",voitures[i].Marque);
-    
-            break ;
+            scanf("%s", voitures[i].Marque);
+            break;
         }
     }
 
-    if ( trouve == 0)
+    if ( trouve == 0 ) 
     {
-        printf("Erreur ! Aucun client n'as ete trouve \n");
+        printf("Erreur ! Aucun voiture n'a ete trouve\n");
     }
 }
 
-void supprimer_voitures ()
+void supprimer_voitures() 
 {
-    char Matricule ;
+    char Matricule[20];
 
     printf("Matricule : ");
-    scanf("%s",&Matricule);
+    scanf("%s", Matricule);
 
-    for ( int i = 0 ; i < Nombre_de_voiture ; i++)
+    for (int i = 0; i < Nombre_de_voiture; i++) 
     {
-        if ( strcmp( voitures[i].Matricule , Matricule ) == 0 )
+        if (strcmp(voitures[i].Matricule, Matricule) == 0) 
         {
-            voitures[i] = voitures[Nombre_de_voiture - 1 ];
-            Nombre_de_voiture -- ;
+            voitures[i] = voitures[Nombre_de_voiture - 1];
+            Nombre_de_voiture--;
+            break;
         }
-        
     }
-    
 }
 
-void ajouter_client ()
+void ajouter_client() 
 {
     printf("Nom : ");
-    scanf(" %s",&Clients[Nombre_de_client].Nom_du_client);
+    scanf("%s", Clients[Nombre_de_client].Nom_du_client);
 
     printf("CIN : ");
-    scanf(" %s",&Clients[Nombre_de_client].CIN);
+    scanf("%s", Clients[Nombre_de_client].CIN);
 
-    printf("le telephone : ");
-    scanf("%d",&Clients[Nombre_de_client].telephone);
+    printf("Telephone : ");
+    scanf("%d", &Clients[Nombre_de_client].Telephone);
 
-    printf("La matricule de la voiture : ");
-    scanf("%s",&Clients[Nombre_de_client].Matricule);
+    printf("Matricule de la voiture : ");
+    scanf("%s", Clients[Nombre_de_client].Matricule);
 
-    printf("L'avance : ");
-    scanf("%f",&Clients[Nombre_de_client].Avance);
+    printf("Avance : ");
+    scanf("%f", &Clients[Nombre_de_client].Avance);
 
-    printf("Le prix à payer : ");
-    scanf("%.2f",&Clients[Nombre_de_client].Prix_à_payer);
+    printf("Prix a payer : ");
+    scanf("%f", &Clients[Nombre_de_client].Prix_à_payer);
 
-    Nombre_de_client ++ ;
+    Nombre_de_client ++;
 }
 
-void modifier_client ()
+void modifier_client() 
 {
-    char CIN ;
+    char CIN[20] ;
     int trouve = 0 ;
 
     printf("CIN : ");
-    scanf("%s",&CIN);
+    scanf("%s", CIN);
 
-    for ( int i = 0 ; i < Nombre_de_client ; i++ )
+    for (int i = 0; i < Nombre_de_client; i++) 
     {
-        if ( strcmp(Clients[Nombre_de_client].CIN , CIN ) == 0 )
+        if (strcmp(Clients[i].CIN, CIN) == 0) 
         {
-            trouve = 1 ;
+            trouve = 1;
 
-            printf("--- Client trouve ! --- \n");
+            printf("--- Client trouve ! ---\n");
 
             printf("Nouveau Nom : ");
-            scanf("%s",&Clients[i].Nom_du_client);
+            scanf("%s", Clients[i].Nom_du_client);
 
-            printf("Nouveau telephone : ");
-            scanf("%d",&Clients[Nombre_de_client].telephone);
+            printf("Nouveau Telephone : ");
+            scanf("%d", &Clients[i].Telephone);
 
-            printf("Nouvelle avance : ");
-            scanf("%f",&Clients[i].Avance);
+            printf("Nouvelle Avance : ");
+            scanf("%f", &Clients[i].Avance);
 
-            printf("Modification faite avec succes \n");
-            break ;
-        }        
+            printf("Modification faite avec succes\n");
+            break;
+        }
     }
-
-    if ( trouve == 0)
-    {
-        printf("Erreur ! Aucun client n'as ete trouve \n");
+    if ( trouve == 0 ) {
+        printf("Erreur ! Aucun client n'a ete trouve\n");
     }
 }
 
-void supprimer_client ()
+void supprimer_client() 
 {
-    char CIN ;
+    char CIN[20];
 
     printf("CIN : ");
-    scanf("%s",&CIN);
+    scanf("%s", CIN);
 
-    for ( int i = 0 ; i < Nombre_de_client ; i++)
+    for (int i = 0; i < Nombre_de_client; i++) 
     {
-        if ( strcmp( Clients[i].CIN , CIN ) == 0 )
+        if (strcmp(Clients[i].CIN, CIN) == 0) 
         {
-            Clients[i] = Clients[Nombre_de_client - 1 ];
-            Nombre_de_client -- ;
+            Clients[i] = Clients[Nombre_de_client - 1];
+            Nombre_de_client--;
+            break;
         }
-
     }
 }
 
-void main ()
-{
-    int choix ;
+void main() {
+    int choix;
+    do {
+        printf("\n---- GESTION LOCATION ----\n");
 
-    do
-    {
-        printf("\n ---- GESTION LOCATION ---- \n");
+        printf("1 - Ajouter voitures\n");
+        printf("2 - Afficher voitures\n");
+        printf("3 - Supprimer voitures\n");
+        printf("4 - Ajouter Client\n");
+        printf("5 - Modifier Client\n");
+        printf("6 - Supprimer client\n");
+        printf("0 - Quitter\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
 
-        printf("1 _ Ajouter voitures  \n");
-        printf("2 _ Afficher voitures  \n");
-        printf("3 _ Supprimer voitures  \n");
-        printf("4 _ Ajouter Client \n");
-        printf("5 _ Modifier Client \n");
-        printf("6 _ Supprimer client \n");
-        prinf("0 _ Quitter \n");
-
-        switch ( choix )
+        switch (choix) 
         {
-        case 1 :
-            ajouter_voitures () ;
-            break;
+            case 1: ajouter_voitures(); 
+                    break;
 
-        case 2 :
-            afficher_voitures () ;
-            break ;
+            case 2: afficher_voitures(); 
+                    break;
 
-        case 3 :
-            supprimer_voitures () ;
-            break ;
+            case 3: supprimer_voitures(); 
+                    break;
 
-        case 4 :
-            ajouter_client () ;
-            break ;
+            case 4: ajouter_client(); 
+                    break;
 
-        case 5 :
-            modifier_client () ;
-            break ;
+            case 5: modifier_client(); 
+                    break;
 
-        case 6 : 
-            supprimer_client () ;
-            break;
+            case 6: supprimer_client(); 
+                    break;
 
-        case 0 :
-            printf("Au revoir ! \n");
-            break;
+            case 0: printf("Au revoir !\n"); 
+                    break;
 
-        default:
-            printf("Choix invalide . \n");
-            break;
-            
+            default: printf("Choix invalide.\n"); 
+                    break;
         }
-    } while ( choix != 0 );
-    
+    } while (choix != 0);
 }
