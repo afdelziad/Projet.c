@@ -19,7 +19,7 @@ struct Client
 struct voiture voitures[Max];
 struct Client Clients[Max];
 
-int Nombre_de_voiture = 0, Nombre_de_client = 0;
+int Nombre_de_voiture = 0 , Nombre_de_client = 0;
 
 void ajouter_voitures() 
 {
@@ -38,7 +38,9 @@ void ajouter_voitures()
     printf("Prix du kilometre : ");
     scanf("%f", &voitures[Nombre_de_voiture].Prix_du_kilometre);
 
-    Nombre_de_voiture ++;
+    Nombre_de_voiture ++ ;
+
+    printf("\n");
 }
 
 void afficher_voitures() 
@@ -54,15 +56,17 @@ void afficher_voitures()
         {
             printf("--- Voiture trouve ! ---\n");
 
-            printf("Marque : %s\n", voitures[i].Marque);
-            printf("Kilometrage : %d\n", voitures[i].kilometrage);
-            printf("Disponibilite : %d\n", voitures[i].disponibilite);
-            printf("Prix du kilometre : %.2f\n", voitures[i].Prix_du_kilometre);
+            printf("Marque : %s \n", voitures[i].Marque);
+            printf("Kilometrage : %d \n", voitures[i].kilometrage);
+            printf("Disponibilite ( 0 / 1 ) : %d \n", voitures[i].disponibilite);
+            printf("Prix du kilometre : %.2f \n", voitures[i].Prix_du_kilometre);
         }
     }
+
+    printf("\n");
 }
 
-void modifier_voitures() 
+void modifier_voitures () 
 {
     char Matricule[20];
     int trouve = 0;
@@ -78,14 +82,17 @@ void modifier_voitures()
             
             printf("Nouvelle marque : ");
             scanf("%s", voitures[i].Marque);
+            
             break;
         }
     }
 
     if ( trouve == 0 ) 
     {
-        printf("Erreur ! Aucun voiture n'a ete trouve\n");
+        printf("Erreur ! Aucun voiture n'a ete trouve .\n");
     }
+
+    printf("\n");
 }
 
 void supprimer_voitures() 
@@ -95,15 +102,17 @@ void supprimer_voitures()
     printf("Matricule : ");
     scanf("%s", Matricule);
 
-    for (int i = 0; i < Nombre_de_voiture; i++) 
+    for (int i = 0 ; i < Nombre_de_voiture ; i++) 
     {
         if (strcmp(voitures[i].Matricule, Matricule) == 0) 
         {
             voitures[i] = voitures[Nombre_de_voiture - 1];
-            Nombre_de_voiture--;
+            Nombre_de_voiture -- ;
             break;
         }
     }
+
+    printf("\n");
 }
 
 void ajouter_client() 
@@ -123,10 +132,12 @@ void ajouter_client()
     printf("Avance : ");
     scanf("%f", &Clients[Nombre_de_client].Avance);
 
-    printf("Prix a payer : ");
+    printf("Prix à payer : ");
     scanf("%f", &Clients[Nombre_de_client].Prix_à_payer);
 
-    Nombre_de_client ++;
+    Nombre_de_client ++ ;
+
+    printf("\n");
 }
 
 void modifier_client() 
@@ -159,8 +170,10 @@ void modifier_client()
         }
     }
     if ( trouve == 0 ) {
-        printf("Erreur ! Aucun client n'a ete trouve\n");
+        printf("Erreur ! Aucun client n'a ete trouve .\n");
     }
+
+    printf("\n");
 }
 
 void supprimer_client() 
@@ -175,7 +188,7 @@ void supprimer_client()
         if (strcmp(Clients[i].CIN, CIN) == 0) 
         {
             Clients[i] = Clients[Nombre_de_client - 1];
-            Nombre_de_client--;
+            Nombre_de_client -- ;
             break;
         }
     }
@@ -186,15 +199,18 @@ void main() {
     do {
         printf("\n---- GESTION LOCATION ----\n");
 
-        printf("1 - Ajouter voitures\n");
-        printf("2 - Afficher voitures\n");
-        printf("3 - Supprimer voitures\n");
-        printf("4 - Ajouter Client\n");
-        printf("5 - Modifier Client\n");
-        printf("6 - Supprimer client\n");
-        printf("0 - Quitter\n");
+        printf("1 - Ajouter voitures \n");
+        printf("2 - Afficher voitures \n");
+        printf("3 - Modifier voitures \n");
+        printf("4 - Supprimer voitures \n");
+        printf("5 - Ajouter Client \n");
+        printf("6 - Modifier Client \n");
+        printf("7 - Supprimer client \n");
+        printf("0 - Quitter \n");
+
         printf("Votre choix : ");
-        scanf("%d", &choix);
+        scanf("%d",&choix);
+        printf("\n");
 
         switch (choix) 
         {
@@ -204,16 +220,19 @@ void main() {
             case 2: afficher_voitures(); 
                     break;
 
-            case 3: supprimer_voitures(); 
+            case 3: modifier_voitures(); 
                     break;
 
-            case 4: ajouter_client(); 
+            case 4: supprimer_voitures(); 
                     break;
 
-            case 5: modifier_client(); 
+            case 5: ajouter_client(); 
                     break;
 
-            case 6: supprimer_client(); 
+            case 6: modifier_client(); 
+                    break;
+
+            case 7: supprimer_client(); 
                     break;
 
             case 0: printf("Au revoir !\n"); 
@@ -222,5 +241,6 @@ void main() {
             default: printf("Choix invalide.\n"); 
                     break;
         }
-    } while (choix != 0);
+        
+    } while ( choix != 0 );
 }
